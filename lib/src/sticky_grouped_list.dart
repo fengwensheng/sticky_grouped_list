@@ -137,7 +137,7 @@ class StickyGroupedListView<T, E> extends StatefulWidget {
   final double initialAlignment;
 
   /// triggered when group changed
-  final void Function(int prev, int curr)? groupChangeCb;
+  final void Function(E prev, E curr)? groupChangeCb;
 
   /// Creates a [StickyGroupedListView].
   const StickyGroupedListView({
@@ -313,7 +313,7 @@ class StickyGroupedListViewState<T, E> extends State<StickyGroupedListView<T, E>
         E prev = widget.groupBy(sortedElements[_topElementIndex]);
         if (prev != curr) {
           // give the Caller a chance to known when group changed
-          widget.groupChangeCb?.call(_topElementIndex, index);
+          widget.groupChangeCb?.call(prev, curr);
           _topElementIndex = index;
           _streamController.add(_topElementIndex);
         }
